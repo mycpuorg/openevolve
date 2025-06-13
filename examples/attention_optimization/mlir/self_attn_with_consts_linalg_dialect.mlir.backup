@@ -47,7 +47,7 @@ module attributes {torch.debug_module_name = "SelfAttention"} {
       %52 = arith.addf %in, %in_18 : f32
       linalg.yield %52 : f32
     } -> tensor<1x16x64xf32>
-    %expanded = tensor.expand_shape %8 [[0], [1], [2, 3]] : tensor<1x16x64xf32> into tensor<1x16x8x8xf32>
+    %expanded = tensor.expand_shape %8 [[0], [1], [2, 3]] output_shape [1, 16, 8, 8] : tensor<1x16x64xf32> into tensor<1x16x8x8xf32>
     %9 = linalg.generic {indexing_maps = [#map, #map1], iterator_types = ["parallel", "parallel"]} ins(%cst_4 : tensor<64x64xf32>) outs(%0 : tensor<64x64xf32>) {
     ^bb0(%in: f32, %out: f32):
       linalg.yield %in : f32
@@ -62,7 +62,7 @@ module attributes {torch.debug_module_name = "SelfAttention"} {
       %52 = arith.addf %in, %in_18 : f32
       linalg.yield %52 : f32
     } -> tensor<1x16x64xf32>
-    %expanded_10 = tensor.expand_shape %12 [[0], [1], [2, 3]] : tensor<1x16x64xf32> into tensor<1x16x8x8xf32>
+    %expanded_10 = tensor.expand_shape %12 [[0], [1], [2, 3]] output_shape [1, 16, 8, 8] : tensor<1x16x64xf32> into tensor<1x16x8x8xf32>
     %13 = linalg.generic {indexing_maps = [#map, #map1], iterator_types = ["parallel", "parallel"]} ins(%cst_2 : tensor<64x64xf32>) outs(%0 : tensor<64x64xf32>) {
     ^bb0(%in: f32, %out: f32):
       linalg.yield %in : f32
@@ -77,7 +77,7 @@ module attributes {torch.debug_module_name = "SelfAttention"} {
       %52 = arith.addf %in, %in_18 : f32
       linalg.yield %52 : f32
     } -> tensor<1x16x64xf32>
-    %expanded_11 = tensor.expand_shape %16 [[0], [1], [2, 3]] : tensor<1x16x64xf32> into tensor<1x16x8x8xf32>
+    %expanded_11 = tensor.expand_shape %16 [[0], [1], [2, 3]] output_shape [1, 16, 8, 8] : tensor<1x16x64xf32> into tensor<1x16x8x8xf32>
     %17 = tensor.empty() : tensor<1x8x16x8xf32>
     %18 = linalg.generic {indexing_maps = [#map6, #map7], iterator_types = ["parallel", "parallel", "parallel", "parallel"]} ins(%expanded : tensor<1x16x8x8xf32>) outs(%17 : tensor<1x8x16x8xf32>) {
     ^bb0(%in: f32, %out: f32):
@@ -109,7 +109,7 @@ module attributes {torch.debug_module_name = "SelfAttention"} {
     %25 = tensor.empty() : tensor<8x16x16xf32>
     %26 = linalg.fill ins(%cst_7 : f32) outs(%25 : tensor<8x16x16xf32>) -> tensor<8x16x16xf32>
     %27 = linalg.batch_matmul ins(%collapsed, %collapsed_12 : tensor<8x16x8xf32>, tensor<8x8x16xf32>) outs(%26 : tensor<8x16x16xf32>) -> tensor<8x16x16xf32>
-    %expanded_13 = tensor.expand_shape %27 [[0, 1], [2], [3]] : tensor<8x16x16xf32> into tensor<1x8x16x16xf32>
+    %expanded_13 = tensor.expand_shape %27 [[0, 1], [2], [3]] output_shape [1, 16, 8, 8] : tensor<8x16x16xf32> into tensor<1x8x16x16xf32>
     %28 = tensor.empty() : tensor<1x8x16x16xf32>
     %29 = linalg.generic {indexing_maps = [#map9, #map6], iterator_types = ["parallel", "parallel", "parallel", "parallel"]} ins(%expanded_13 : tensor<1x8x16x16xf32>) outs(%28 : tensor<1x8x16x16xf32>) {
     ^bb0(%in: f32, %out: f32):
@@ -164,7 +164,7 @@ module attributes {torch.debug_module_name = "SelfAttention"} {
     %42 = tensor.empty() : tensor<8x16x8xf32>
     %43 = linalg.fill ins(%cst_7 : f32) outs(%42 : tensor<8x16x8xf32>) -> tensor<8x16x8xf32>
     %44 = linalg.batch_matmul ins(%collapsed_14, %collapsed_15 : tensor<8x16x16xf32>, tensor<8x16x8xf32>) outs(%43 : tensor<8x16x8xf32>) -> tensor<8x16x8xf32>
-    %expanded_16 = tensor.expand_shape %44 [[0, 1], [2], [3]] : tensor<8x16x8xf32> into tensor<1x8x16x8xf32>
+    %expanded_16 = tensor.expand_shape %44 [[0, 1], [2], [3]] output_shape [1, 16, 8, 8] : tensor<8x16x8xf32> into tensor<1x8x16x8xf32>
     %45 = tensor.empty() : tensor<1x16x8x8xf32>
     %46 = linalg.generic {indexing_maps = [#map6, #map7], iterator_types = ["parallel", "parallel", "parallel", "parallel"]} ins(%expanded_16 : tensor<1x8x16x8xf32>) outs(%45 : tensor<1x16x8x8xf32>) {
     ^bb0(%in: f32, %out: f32):
